@@ -1,0 +1,90 @@
+<html>
+<head>
+  <style>
+    #universe {
+      width:600px;
+      height:600px;
+      background:url("bg_stars.jpg");
+      animation:bg_move 2s linear infinite;
+    }
+    @keyframes bg_move {
+      0%{background-position-y:0px;}
+      100%{background-position-y:213px;}
+    }
+    #ship {
+      width:60px;
+      height:60px;
+      position:absolute;
+    }
+    .ufo {
+      width:60px;
+      height:60px;
+      position:absolute;
+    }
+  </style>
+  <script>
+    function get(id) {
+      return document.getElementById(id);
+  }
+    function gets(qs) {
+      return Arrey.from(document.querySelectorAll(qs));
+  }
+    function getRnd(min,max);
+    function gameInit() {
+      ship={w:60,h:60,x:270,y:540};
+      mydir={" ":0,"ArreyDown":0,"ArreyLeft":0,"ArreyRight":0,"ArreyUp":0};
+
+
+      setInterval(ship_move,10);	
+      setInterval(ufo_create,100);
+  }
+    function myketdown(ev) {
+      ev.preventDefault();
+      mydir=[ev.key]=1;
+  }
+    function mykeyup(ev) {
+      ev.preventDefault();
+      mydir=[ev.key]=0;
+  }
+    function ship_move() {
+      if(mydir["ArreyDown"] && ship.y + ship.h < 600) {
+        ship.y++;
+      } else if(mydir["ArreyLeft"] && ship.x > 0) {
+        ship.x--;
+      } else if(mydir["ArreyRight"] && ship.x + ship.w < 600) {
+        ship.x++;
+      } else if(mydir["ArreyUp"] && ship.y > 300) {
+        ship.y--;
+      }
+
+      get("ship").style.left=ship.x+"px";
+      get("ship").style.top=ship.y+"px";
+    }
+    function ufo_create()　{
+      var u=document.createElement("img");
+      u.src="ufo_png";
+      u.className="ufo";
+      u.style.left=getRnd 
+    }
+	function bullet_create() {
+		var  b=document.createElement("div");
+		b.className="bullet";
+		b.w=3,b.h=5;
+		b.pos={x:ship.x+(ship.w/2),y:ship.y};
+		b.style.left=b.pos+"px";
+		b.move=setInterval(bullet_move,10,b);
+		get("universe").appendChild(b);
+	}
+	function bullet_move(b) {
+		if(b.pos.y<0) return die(b);
+		b.pos.y--;
+		b.style.top=b.pos.y
+  </script>
+</head>
+<body onload="gameInit();" onkeydown="mykeydown(event);" onkeyup="mykeyup(event);">
+  <div id="universe">
+  <img id="ship" src="ship.png">
+  <img class="ufo" src="ufo.png">
+  </div>
+</body>
+</html>
