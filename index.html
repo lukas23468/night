@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>猜個數字</title>
+  </head>
+  <body>
+    <h1>猜數字遊戲</h1>
+    <p>請猜一個 1 到 10 之間的數字：</p>
+    <input type="text" id="guess">
+    <button onclick="checkGuess()">猜猜看</button>
+    <p id="result"></p>
+    <script>
+      function checkGuess() {
+
+        const correctNumber = Math.floor(Math.random() * 10) + 1;
+
+        const guess = document.getElementById('guess').value;
+
+        if (guess == correctNumber) {
+          document.getElementById('result').innerHTML = '你居然猜對了！';
+        } else {
+          document.getElementById('result').innerHTML = '很遺憾，你猜錯了，正確的數字是 ' + correctNumber + '。';
+        }
+      }
+    </script>
+  </body>
+</html>
